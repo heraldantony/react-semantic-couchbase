@@ -1,0 +1,154 @@
+const express = require('express')
+const chalk = require('chalk')
+const db = require('../../db')
+const CountryModel = require('../../schema/model/country')
+
+const router = express.Router()
+const bucket = process.env.BUCKET
+const PAGESIZE = 10
+
+
+// Define the routes for Country
+router.get("/", function(req, res) {
+  var options = {
+    limit: req.query.limit || PAGESIZE,
+    skip: req.query.page ? (req.query.page * (req.query.limit || PAGESIZE)) : 0
+  }
+  if (!req.query.search) {
+    CountryModel.find({}, options, function(error, result, meta) {
+      if (error) {
+        return res.status(400).send(error);
+      }
+      //res.setHeader('X-Total-Count', meta.status.total);
+      return res.send(result);
+    });
+  } else {
+    db.queryEntity('Country', req.query.search, options, function(error, result, meta) {
+      if (error) {
+        return res.status(400).send(error);
+      }
+      res.setHeader('X-Total-Count', meta.status.total);
+      var entities = result.map((e) => {
+        return CountryModel.ref(e.id.substring(e.id.indexOf("|") + 1))
+      })
+      CountryModel.loadAll(entities, () => {
+        return res.send(entities);
+      });
+    });
+  }
+});
+router.get("/:countryId", function(req, res) {
+  if (!req.params.countryId) {
+    CountryModel.find({}, function(error, result) {
+      if (error) {
+        return res.status(400).send(error);
+      }
+      return res.send(result);
+    });
+  } else {
+    CountryModel.getById(req.params.countryId, function(error, country) {
+      if (error) {
+        return res.status(400).send(error);
+      }
+      return res.send(country);
+    });
+  }
+});
+
+
+router.post('/', (req, res, next) => {
+  if (req.body.hasOwnProperty("id")) {
+    return res.status(400).send({
+      "status": "error",
+      "message": "Cannot use http post for updating Country"
+    });
+  }
+  const {
+
+    countryName
+
+  } = req.body
+  CountryModel.createAndSave(
+    countryName,
+    (createErr, newCountry) => {
+      if (createErr) {
+        console.log(chalk.red(createErr))
+
+        return res.status(400).send({
+          "status": "error",
+          "message": createErr
+        });
+
+
+      } else {
+        return res.json(newCountry);
+
+      }
+    })
+
+})
+router.put('/:countryId', (req, res, next) => {
+  if (!req.params.countryId) {
+    return res.status(400).send({
+      "status": "error",
+      "message": "A Country ID is required"
+    });
+  }
+  CountryModel.getById(req.params.countryId, {}, function(error, country) {
+    if (error) {
+      return res.status(400).send(error);
+    }
+
+
+
+    if (req.body.hasOwnProperty("countryName")) {
+      country.countryName = req.body.countryName
+    }
+
+
+
+    country.save(function(saveError, savedCountry) {
+      if (saveError) {
+        return res.status(400).send(saveError);
+      }
+      res.send(savedCountry);
+    });
+
+
+  });
+
+
+})
+router.patch('/:countryId', (req, res, next) => {
+  if (!req.params.countryId) {
+    return res.status(400).send({
+      "status": "error",
+      "message": "A Country ID is required"
+    });
+  }
+  CountryModel.getById(req.params.countryId, {}, function(error, country) {
+    if (error) {
+      return res.status(400).send(error);
+    }
+
+
+
+    if (req.body.hasOwnProperty("countryName")) {
+      country.countryName = req.body.countryName
+    }
+
+
+
+    country.save(function(saveError, savedCountry) {
+      if (saveError) {
+        return res.status(400).send(saveError);
+      }
+      res.send(savedCountry);
+    });
+
+
+  });
+
+
+})
+module.exports = router
