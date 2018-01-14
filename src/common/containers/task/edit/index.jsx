@@ -11,36 +11,36 @@ import InputField from 'components/elements/InputField'
 import {DateTime} from 'react-datetime'
 import TextAreaField from 'components/elements/TextAreaField'
 import { TASK_GET, TASK_SAVE } from 'actions/task'
-import { createStructuredSelector } from 'reselect';
-import {makeSelectTask,makeSelectTaskInitialValues} from 'selectors/task'
+import { createStructuredSelector } from 'reselect'
+import {makeSelectTask, makeSelectTaskInitialValues} from 'selectors/task'
 
 type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Title',
-	name: 'title',
-	label: 'Title',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Description',
-	name: 'description',
-	label: 'Description',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Title',
+		name: 'title',
+		label: 'Title',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Description',
+		name: 'description',
+		label: 'Description',
+
+		component: InputField
+	}
+
 ]
 class TaskEdit extends Component<Props, State> {
-        componentDidMount() {
-          if(this.props.match.params && this.props.match.params.id) {
-            this.props.dispatch(TASK_GET(this.props.match.params.id))
-          }
-        }
+	componentDidMount () {
+		if (this.props.match.params && this.props.match.params.id) {
+			this.props.dispatch(TASK_GET(this.props.match.params.id))
+		}
+	}
 
 	render () {
 		const {handleSubmit} = this.props
@@ -52,12 +52,12 @@ class TaskEdit extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/task`,
-                                                  state: {}
-                                                  }}>Search Task</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/task`,
+								state: {}
+							}}>Search Task</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -80,11 +80,11 @@ class TaskEdit extends Component<Props, State> {
 	}
 }
 const mapStateToProps = state => createStructuredSelector({
-        taskProps: makeSelectTask(),
-        initialValues: makeSelectTaskInitialValues()
+	taskProps: makeSelectTask(),
+	initialValues: makeSelectTaskInitialValues()
 
-      }
-    )
+}
+)
 
 const mapDispatchToProps = dispatch => ({
 	async save (data) {
@@ -94,6 +94,5 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-         reduxForm({ form: 'TASK_EDIT_FORM', enableReinitialize: true })(TaskEdit)
+	reduxForm({ form: 'TASK_EDIT_FORM', enableReinitialize: true })(TaskEdit)
 )
-

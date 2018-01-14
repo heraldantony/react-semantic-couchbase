@@ -1,63 +1,51 @@
 // @flow
 import {
-  fromJS
-} from 'immutable';
+	fromJS
+} from 'immutable'
 
 import {
 
+	LOCATION_SEARCH_SUCCESS,
+	LOCATION_SEARCH_FAIL,
 
-  LOCATION_SEARCH_SUCCESS,
-  LOCATION_SEARCH_FAIL,
+	LOCATION_GET_SUCCESS,
+	LOCATION_GET_FAIL,
 
+	LOCATION_ADD_SUCCESS,
+	LOCATION_ADD_FAIL,
 
-  LOCATION_GET_SUCCESS,
-  LOCATION_GET_FAIL,
+	LOCATION_SAVE_SUCCESS,
+	LOCATION_SAVE_FAIL,
 
-
-  LOCATION_ADD_SUCCESS,
-  LOCATION_ADD_FAIL,
-
-
-  LOCATION_SAVE_SUCCESS,
-  LOCATION_SAVE_FAIL,
-
-
-  LOCATION_UPDATE_SUCCESS,
-  LOCATION_UPDATE_FAIL
-
+	LOCATION_UPDATE_SUCCESS,
+	LOCATION_UPDATE_FAIL
 
 } from 'actions/location'
 
 import {
-  APPLICATION_INIT
+	APPLICATION_INIT
 } from 'actions/common'
 
 import type {
 
+	LOCATION_SEARCH_SUCCESS_TYPE,
+	LOCATION_SEARCH_FAIL_TYPE,
 
-  LOCATION_SEARCH_SUCCESS_TYPE,
-  LOCATION_SEARCH_FAIL_TYPE,
+	LOCATION_GET_SUCCESS_TYPE,
+	LOCATION_GET_FAIL_TYPE,
 
+	LOCATION_ADD_SUCCESS_TYPE,
+	LOCATION_ADD_FAIL_TYPE,
 
-  LOCATION_GET_SUCCESS_TYPE,
-  LOCATION_GET_FAIL_TYPE,
+	LOCATION_SAVE_SUCCESS_TYPE,
+	LOCATION_SAVE_FAIL_TYPE,
 
-
-  LOCATION_ADD_SUCCESS_TYPE,
-  LOCATION_ADD_FAIL_TYPE,
-
-
-  LOCATION_SAVE_SUCCESS_TYPE,
-  LOCATION_SAVE_FAIL_TYPE,
-
-
-  LOCATION_UPDATE_SUCCESS_TYPE,
-  LOCATION_UPDATE_FAIL_TYPE
-
+	LOCATION_UPDATE_SUCCESS_TYPE,
+	LOCATION_UPDATE_FAIL_TYPE
 
 } from 'actions/location'
 import type {
-  APPLICATION_INIT_TYPE
+	APPLICATION_INIT_TYPE
 } from 'actions/common'
 
 export type Location = {
@@ -86,132 +74,111 @@ export type State = {
 type Action = |
   APPLICATION_INIT_TYPE
 
-
   |
   LOCATION_SEARCH_SUCCESS_TYPE |
   LOCATION_SEARCH_FAIL_TYPE
-
 
   |
   LOCATION_GET_SUCCESS_TYPE |
   LOCATION_GET_FAIL_TYPE
 
-
   |
   LOCATION_ADD_SUCCESS_TYPE |
   LOCATION_ADD_FAIL_TYPE
-
 
   |
   LOCATION_SAVE_SUCCESS_TYPE |
   LOCATION_SAVE_FAIL_TYPE
 
-
   |
   LOCATION_UPDATE_SUCCESS_TYPE |
   LOCATION_UPDATE_FAIL_TYPE
 
-
 export const initialState = {
-  search: '',
-  location: {},
-  locations: [],
-  start: 0,
-  limit: 10,
-  otherSearchStart: 0,
-  otherSearchLimit: 10,
-  otherSearchLocations: [],
-  error: ''
+	search: '',
+	location: {},
+	locations: [],
+	start: 0,
+	limit: 10,
+	otherSearchStart: 0,
+	otherSearchLimit: 10,
+	otherSearchLocations: [],
+	error: ''
 }
 
-export function location(state = initialState, action: Action): State {
-  switch (action.type) {
-    case APPLICATION_INIT:
-      return { ...initialState,
-        ...state
-      }
+export function location (state = initialState, action: Action): State {
+	switch (action.type) {
+	case APPLICATION_INIT:
+		return { ...initialState,
+			...state
+		}
 
+	case LOCATION_SEARCH_SUCCESS:
+	{
+		return { ...state,
+			locations: action.payload
+		}
+	}
+	case LOCATION_SEARCH_FAIL:
+	{
+		return { ...state,
+			error: action.error
+		}
+	}
 
-    case LOCATION_SEARCH_SUCCESS:
-      {
+	case LOCATION_GET_SUCCESS:
+	{
+		return { ...state,
+			location: action.payload
+		}
+	}
+	case LOCATION_GET_FAIL:
+	{
+		return { ...state,
+			error: action.error
+		}
+	}
 
-        return { ...state,
-          locations: action.payload
-        }
+	case LOCATION_ADD_SUCCESS:
+	{
+		return { ...state,
+			location: action.payload
+		}
+	}
+	case LOCATION_ADD_FAIL:
+	{
+		return { ...state,
+			error: action.error
+		}
+	}
 
-      }
-    case LOCATION_SEARCH_FAIL:
-      {
-        return { ...state,
-          error: action.error
-        }
-      }
+	case LOCATION_SAVE_SUCCESS:
+	{
+		return { ...state,
+			location: action.payload
+		}
+	}
+	case LOCATION_SAVE_FAIL:
+	{
+		return { ...state,
+			error: action.error
+		}
+	}
 
+	case LOCATION_UPDATE_SUCCESS:
+	{
+		return { ...state,
+			location: action.payload
+		}
+	}
+	case LOCATION_UPDATE_FAIL:
+	{
+		return { ...state,
+			error: action.error
+		}
+	}
 
-    case LOCATION_GET_SUCCESS:
-      {
-
-        return { ...state,
-          location: action.payload
-        }
-
-      }
-    case LOCATION_GET_FAIL:
-      {
-        return { ...state,
-          error: action.error
-        }
-      }
-
-
-    case LOCATION_ADD_SUCCESS:
-      {
-
-        return { ...state,
-          location: action.payload
-        }
-
-      }
-    case LOCATION_ADD_FAIL:
-      {
-        return { ...state,
-          error: action.error
-        }
-      }
-
-
-    case LOCATION_SAVE_SUCCESS:
-      {
-
-        return { ...state,
-          location: action.payload
-        }
-
-      }
-    case LOCATION_SAVE_FAIL:
-      {
-        return { ...state,
-          error: action.error
-        }
-      }
-
-
-    case LOCATION_UPDATE_SUCCESS:
-      {
-
-        return { ...state,
-          location: action.payload
-        }
-
-      }
-    case LOCATION_UPDATE_FAIL:
-      {
-        return { ...state,
-          error: action.error
-        }
-      }
-
-    default:
-      return state
-  }
+	default:
+		return state
+	}
 }

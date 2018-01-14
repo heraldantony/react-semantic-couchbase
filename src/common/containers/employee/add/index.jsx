@@ -16,62 +16,62 @@ type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'First Name',
-	name: 'firstName',
-	label: 'First Name',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Last Name',
-	name: 'lastName',
-	label: 'Last Name',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Email',
-	name: 'email',
-	label: 'Email',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Phone Number',
-	name: 'phoneNumber',
-	label: 'Phone Number',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Hire Date',
-	name: 'hireDate',
-	label: 'Hire Date',
-        
-	component: DateTime
-       } , 
-  
-        {
-	placeholder: 'Salary',
-	name: 'salary',
-	label: 'Salary',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Commission Pct',
-	name: 'commissionPct',
-	label: 'Commission Pct',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'First Name',
+		name: 'firstName',
+		label: 'First Name',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Last Name',
+		name: 'lastName',
+		label: 'Last Name',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Email',
+		name: 'email',
+		label: 'Email',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Phone Number',
+		name: 'phoneNumber',
+		label: 'Phone Number',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Hire Date',
+		name: 'hireDate',
+		label: 'Hire Date',
+
+		component: DateTime
+	},
+
+	{
+		placeholder: 'Salary',
+		name: 'salary',
+		label: 'Salary',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Commission Pct',
+		name: 'commissionPct',
+		label: 'Commission Pct',
+
+		component: InputField
+	}
+
 ]
 class EmployeeAdd extends Component<Props, State> {
 	render () {
@@ -84,12 +84,12 @@ class EmployeeAdd extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/employee`,
-                                                  state: {}
-                                                  }}>Search Employee</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/employee`,
+								state: {}
+							}}>Search Employee</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -123,4 +123,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'EMPLOYEE_ADD_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(EmployeeAdd)
 )
-

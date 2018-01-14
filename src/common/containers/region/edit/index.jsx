@@ -11,28 +11,28 @@ import InputField from 'components/elements/InputField'
 import {DateTime} from 'react-datetime'
 import TextAreaField from 'components/elements/TextAreaField'
 import { REGION_GET, REGION_SAVE } from 'actions/region'
-import { createStructuredSelector } from 'reselect';
-import {makeSelectRegion,makeSelectRegionInitialValues} from 'selectors/region'
+import { createStructuredSelector } from 'reselect'
+import {makeSelectRegion, makeSelectRegionInitialValues} from 'selectors/region'
 
 type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Region Name',
-	name: 'regionName',
-	label: 'Region Name',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Region Name',
+		name: 'regionName',
+		label: 'Region Name',
+
+		component: InputField
+	}
+
 ]
 class RegionEdit extends Component<Props, State> {
-        componentDidMount() {
-          if(this.props.match.params && this.props.match.params.id) {
-            this.props.dispatch(REGION_GET(this.props.match.params.id))
-          }
-        }
+	componentDidMount () {
+		if (this.props.match.params && this.props.match.params.id) {
+			this.props.dispatch(REGION_GET(this.props.match.params.id))
+		}
+	}
 
 	render () {
 		const {handleSubmit} = this.props
@@ -44,12 +44,12 @@ class RegionEdit extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/region`,
-                                                  state: {}
-                                                  }}>Search Region</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/region`,
+								state: {}
+							}}>Search Region</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -72,11 +72,11 @@ class RegionEdit extends Component<Props, State> {
 	}
 }
 const mapStateToProps = state => createStructuredSelector({
-        regionProps: makeSelectRegion(),
-        initialValues: makeSelectRegionInitialValues()
+	regionProps: makeSelectRegion(),
+	initialValues: makeSelectRegionInitialValues()
 
-      }
-    )
+}
+)
 
 const mapDispatchToProps = dispatch => ({
 	async save (data) {
@@ -86,6 +86,5 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-         reduxForm({ form: 'REGION_EDIT_FORM', enableReinitialize: true })(RegionEdit)
+	reduxForm({ form: 'REGION_EDIT_FORM', enableReinitialize: true })(RegionEdit)
 )
-

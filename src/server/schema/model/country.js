@@ -2,70 +2,46 @@ var ottoman = require('ottoman')
 
 var CountryModel = ottoman.model('Country', {
 
-  countryName: 'string',
+	countryName: 'string',
 
-
-
-  region: {
-    ref: 'Region'
-  }
-
-
-
-
-
+	region: {
+		ref: 'Region'
+	}
 
 }, {
-  index: {
+	index: {
 
+		findByRegion: {
+			by: 'region'
+		}
 
-    findByRegion: {
-      by: 'region'
-    }
-
-
-
-
-  }
+	}
 })
 
-CountryModel.createAndSave = function(
-  countryName,
-  done) {
+CountryModel.createAndSave = function (
+	countryName,
+	done) {
+	this.create({
 
-  this.create({
+		countryName
 
-    countryName,
-
-  }, done)
-
+	}, done)
 }
 
-
-
-CountryModel.prototype.setCountryName = function(countryName, done) {
-  this.countryName = countryName
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+CountryModel.prototype.setCountryName = function (countryName, done) {
+	this.countryName = countryName
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-
-
-
-CountryModel.prototype.setRegion = function(region, done) {
-  this.region = region
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+CountryModel.prototype.setRegion = function (region, done) {
+	this.region = region
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
-
-
-
-
-
-
 
 module.exports = CountryModel

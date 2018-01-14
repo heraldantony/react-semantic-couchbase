@@ -1,5 +1,5 @@
 import {
-  Router
+	Router
 } from 'express'
 import auth from './auth'
 import links from './links.json'
@@ -19,14 +19,12 @@ import employee from './employee'
 
 import job from './job'
 
-import jobhistory from './jobhistory'
-
 const router = Router()
 
 router.use('/auth', auth)
 router.use('/signup', signup)
 router.get('/links', (req, res) => {
-  res.send(links)
+	res.send(links)
 })
 
 router.use('/region', region)
@@ -42,8 +40,5 @@ router.use('/task', task)
 router.use('/employee', employee)
 
 router.use('/job', job)
-
-router.use('/jobhistory', jobhistory)
-
 
 export default router

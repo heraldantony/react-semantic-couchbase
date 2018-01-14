@@ -2,100 +2,65 @@ var ottoman = require('ottoman')
 
 var DepartmentModel = ottoman.model('Department', {
 
-  departmentName: 'string',
+	departmentName: 'string',
 
+	location: {
+		ref: 'Location'
+	},
 
-
-  location: {
-    ref: 'Location'
-  }
-
-  ,
-
-
-  employees: [{
-    ref: 'Employee'
-  }]
-
-
-
-
-
+	employees: [{
+		ref: 'Employee'
+	}]
 
 }, {
-  index: {
+	index: {
 
+		findByLocation: {
+			by: 'location'
+		},
 
-    findByLocation: {
-      by: 'location'
-    }
+		findByEmployee: {
+			by: 'employee'
+		}
 
-    ,
-
-
-    findByEmployee: {
-      by: 'employee'
-    }
-
-
-
-
-  }
+	}
 })
 
-DepartmentModel.createAndSave = function(
-  departmentName,
-  done) {
+DepartmentModel.createAndSave = function (
+	departmentName,
+	done) {
+	this.create({
 
-  this.create({
+		departmentName
 
-    departmentName,
-
-  }, done)
-
+	}, done)
 }
 
-
-
-DepartmentModel.prototype.setDepartmentName = function(departmentName, done) {
-  this.departmentName = departmentName
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+DepartmentModel.prototype.setDepartmentName = function (departmentName, done) {
+	this.departmentName = departmentName
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-
-
-
-DepartmentModel.prototype.setLocation = function(location, done) {
-  this.location = location
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+DepartmentModel.prototype.setLocation = function (location, done) {
+	this.location = location
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-
-
-
-
-
-
-
-
-DepartmentModel.prototype.addEmployee = function(employee, done) {
-  if (!this.employees) {
-    this.employees = []
-  }
-  this.employees.push(employee)
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+DepartmentModel.prototype.addEmployee = function (employee, done) {
+	if (!this.employees) {
+		this.employees = []
+	}
+	this.employees.push(employee)
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
-
-
-
 
 module.exports = DepartmentModel

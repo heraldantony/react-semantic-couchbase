@@ -11,28 +11,28 @@ import InputField from 'components/elements/InputField'
 import {DateTime} from 'react-datetime'
 import TextAreaField from 'components/elements/TextAreaField'
 import { COUNTRY_GET, COUNTRY_SAVE } from 'actions/country'
-import { createStructuredSelector } from 'reselect';
-import {makeSelectCountry,makeSelectCountryInitialValues} from 'selectors/country'
+import { createStructuredSelector } from 'reselect'
+import {makeSelectCountry, makeSelectCountryInitialValues} from 'selectors/country'
 
 type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Country Name',
-	name: 'countryName',
-	label: 'Country Name',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Country Name',
+		name: 'countryName',
+		label: 'Country Name',
+
+		component: InputField
+	}
+
 ]
 class CountryEdit extends Component<Props, State> {
-        componentDidMount() {
-          if(this.props.match.params && this.props.match.params.id) {
-            this.props.dispatch(COUNTRY_GET(this.props.match.params.id))
-          }
-        }
+	componentDidMount () {
+		if (this.props.match.params && this.props.match.params.id) {
+			this.props.dispatch(COUNTRY_GET(this.props.match.params.id))
+		}
+	}
 
 	render () {
 		const {handleSubmit} = this.props
@@ -44,12 +44,12 @@ class CountryEdit extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/country`,
-                                                  state: {}
-                                                  }}>Search Country</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/country`,
+								state: {}
+							}}>Search Country</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -72,11 +72,11 @@ class CountryEdit extends Component<Props, State> {
 	}
 }
 const mapStateToProps = state => createStructuredSelector({
-        countryProps: makeSelectCountry(),
-        initialValues: makeSelectCountryInitialValues()
+	countryProps: makeSelectCountry(),
+	initialValues: makeSelectCountryInitialValues()
 
-      }
-    )
+}
+)
 
 const mapDispatchToProps = dispatch => ({
 	async save (data) {
@@ -86,6 +86,5 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-         reduxForm({ form: 'COUNTRY_EDIT_FORM', enableReinitialize: true })(CountryEdit)
+	reduxForm({ form: 'COUNTRY_EDIT_FORM', enableReinitialize: true })(CountryEdit)
 )
-

@@ -9,21 +9,21 @@ import {FormattedMessage} from 'react-intl'
 import { connect } from 'react-redux'
 import InputField from 'components/elements/InputField'
 import { LOCATION_SEARCH } from 'actions/location'
-import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect'
 import {makeSelectSearchLocation} from 'selectors/location'
 
 type Props = FormProps
 
 const headerNames = [
 
-	"Street Address", 
+	'Street Address',
 
-	"Postal Code", 
+	'Postal Code',
 
-	"City", 
+	'City',
 
-	"State Province"
- ]
+	'State Province'
+]
 const searchFields = [{
 	placeholder: 'Search',
 	name: 'search',
@@ -41,12 +41,12 @@ class LocationSearch extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/addLocation`,
-                                                  state: {}
-                                                  }}>Add Location</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/addLocation`,
+								state: {}
+							}}>Add Location</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -64,72 +64,72 @@ class LocationSearch extends Component<Props, State> {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-                     { (searchProps && searchProps.locations.length) ?  (
-<Table celled>
-    <Table.Header>
-      <Table.Row>
+				{ (searchProps && searchProps.locations.length) ? (
+					<Table celled>
+						<Table.Header>
+							<Table.Row>
 
-	<Table.HeaderCell>Street Address</Table.HeaderCell>
+								<Table.HeaderCell>Street Address</Table.HeaderCell>
 
-	<Table.HeaderCell>Postal Code</Table.HeaderCell>
+								<Table.HeaderCell>Postal Code</Table.HeaderCell>
 
-	<Table.HeaderCell>City</Table.HeaderCell>
+								<Table.HeaderCell>City</Table.HeaderCell>
 
-	<Table.HeaderCell>State Province</Table.HeaderCell>
- 
-	<Table.HeaderCell>&nbsp;</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
+								<Table.HeaderCell>State Province</Table.HeaderCell>
 
-    <Table.Body>
-     { searchProps.locations.map((location, idx) => {
-      return ( <Table.Row key={"location_"+idx}>
+								<Table.HeaderCell>&nbsp;</Table.HeaderCell>
+							</Table.Row>
+						</Table.Header>
 
-	<Table.Cell>{location["streetAddress"]}</Table.Cell>
+						<Table.Body>
+							{ searchProps.locations.map((location, idx) => {
+								return (<Table.Row key={'location_' + idx}>
 
-	<Table.Cell>{location["postalCode"]}</Table.Cell>
+									<Table.Cell>{location['streetAddress']}</Table.Cell>
 
-	<Table.Cell>{location["city"]}</Table.Cell>
+									<Table.Cell>{location['postalCode']}</Table.Cell>
 
-	<Table.Cell>{location["stateProvince"]}</Table.Cell>
- 
-	<Table.Cell><Link to={"/editLocation/"+location["_id"]}><Button icon><Icon name="edit"/></Button></Link>
-  <Link to={"/viewLocation/"+location["_id"]}><Button icon><Icon name="unhide"/></Button></Link></Table.Cell>
-      </Table.Row> )
-      })
-    }
-    </Table.Body>
+									<Table.Cell>{location['city']}</Table.Cell>
 
-    <Table.Footer>
-      <Table.Row>
-        <Table.HeaderCell colSpan='3'>
-          <Menu floated='right' pagination>
-            <Menu.Item as='a' icon>
-              <Icon name='left chevron' />
-            </Menu.Item>
-            <Menu.Item as='a'>1</Menu.Item>
-            <Menu.Item as='a'>2</Menu.Item>
-            <Menu.Item as='a'>3</Menu.Item>
-            <Menu.Item as='a'>4</Menu.Item>
-            <Menu.Item as='a' icon>
-              <Icon name='right chevron' />
-            </Menu.Item>
-          </Menu>
-        </Table.HeaderCell>
-      </Table.Row>
-    </Table.Footer>
-  </Table>
- ) : ""
-}
-                         
+									<Table.Cell>{location['stateProvince']}</Table.Cell>
+
+									<Table.Cell><Link to={'/editLocation/' + location['_id']}><Button icon><Icon name="edit"/></Button></Link>
+										<Link to={'/viewLocation/' + location['_id']}><Button icon><Icon name="unhide"/></Button></Link></Table.Cell>
+								</Table.Row>)
+							})
+							}
+						</Table.Body>
+
+						<Table.Footer>
+							<Table.Row>
+								<Table.HeaderCell colSpan='3'>
+									<Menu floated='right' pagination>
+										<Menu.Item as='a' icon>
+											<Icon name='left chevron' />
+										</Menu.Item>
+										<Menu.Item as='a'>1</Menu.Item>
+										<Menu.Item as='a'>2</Menu.Item>
+										<Menu.Item as='a'>3</Menu.Item>
+										<Menu.Item as='a'>4</Menu.Item>
+										<Menu.Item as='a' icon>
+											<Icon name='right chevron' />
+										</Menu.Item>
+									</Menu>
+								</Table.HeaderCell>
+							</Table.Row>
+						</Table.Footer>
+					</Table>
+				) : ''
+				}
+
 			</div>
 		)
 	}
 }
 const mapStateToProps = state => createStructuredSelector({
-        searchProps: makeSelectSearchLocation()
-      }
-    )
+	searchProps: makeSelectSearchLocation()
+}
+)
 
 const mapDispatchToProps = dispatch => ({
 	async search (data) {
@@ -142,4 +142,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'LOCATION_SEARCH_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(LocationSearch)
 )
-

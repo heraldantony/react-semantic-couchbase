@@ -2,112 +2,88 @@ var ottoman = require('ottoman')
 
 var LocationModel = ottoman.model('Location', {
 
-  streetAddress: 'string',
+	streetAddress: 'string',
 
-  postalCode: 'string',
+	postalCode: 'string',
 
-  city: 'string',
+	city: 'string',
 
-  stateProvince: 'string',
+	stateProvince: 'string',
 
-
-
-  country: {
-    ref: 'Country'
-  }
-
-
-
-
-
+	country: {
+		ref: 'Country'
+	}
 
 }, {
-  index: {
+	index: {
 
+		findByCountry: {
+			by: 'country'
+		}
 
-    findByCountry: {
-      by: 'country'
-    }
-
-
-
-
-  }
+	}
 })
 
-LocationModel.createAndSave = function(
-  streetAddress,
+LocationModel.createAndSave = function (
+	streetAddress,
 
-  postalCode,
+	postalCode,
 
-  city,
+	city,
 
-  stateProvince,
-  done) {
+	stateProvince,
+	done) {
+	this.create({
 
-  this.create({
+		streetAddress,
 
-    streetAddress,
+		postalCode,
 
-    postalCode,
+		city,
 
-    city,
+		stateProvince
 
-    stateProvince,
-
-  }, done)
-
+	}, done)
 }
 
-
-
-LocationModel.prototype.setStreetAddress = function(streetAddress, done) {
-  this.streetAddress = streetAddress
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+LocationModel.prototype.setStreetAddress = function (streetAddress, done) {
+	this.streetAddress = streetAddress
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-LocationModel.prototype.setPostalCode = function(postalCode, done) {
-  this.postalCode = postalCode
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+LocationModel.prototype.setPostalCode = function (postalCode, done) {
+	this.postalCode = postalCode
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-LocationModel.prototype.setCity = function(city, done) {
-  this.city = city
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+LocationModel.prototype.setCity = function (city, done) {
+	this.city = city
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-LocationModel.prototype.setStateProvince = function(stateProvince, done) {
-  this.stateProvince = stateProvince
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+LocationModel.prototype.setStateProvince = function (stateProvince, done) {
+	this.stateProvince = stateProvince
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
 
-
-
-
-LocationModel.prototype.setCountry = function(country, done) {
-  this.country = country
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+LocationModel.prototype.setCountry = function (country, done) {
+	this.country = country
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
-
-
-
-
-
-
 
 module.exports = LocationModel

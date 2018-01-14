@@ -16,14 +16,14 @@ type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Country Name',
-	name: 'countryName',
-	label: 'Country Name',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Country Name',
+		name: 'countryName',
+		label: 'Country Name',
+
+		component: InputField
+	}
+
 ]
 class CountryAdd extends Component<Props, State> {
 	render () {
@@ -36,12 +36,12 @@ class CountryAdd extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/country`,
-                                                  state: {}
-                                                  }}>Search Country</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/country`,
+								state: {}
+							}}>Search Country</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -75,4 +75,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'COUNTRY_ADD_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(CountryAdd)
 )
-

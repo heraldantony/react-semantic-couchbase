@@ -2,43 +2,30 @@ var ottoman = require('ottoman')
 
 var RegionModel = ottoman.model('Region', {
 
-  regionName: 'string',
-
-
-
-
+	regionName: 'string'
 
 }, {
-  index: {
+	index: {
 
-
-  }
+	}
 })
 
-RegionModel.createAndSave = function(
-  regionName,
-  done) {
+RegionModel.createAndSave = function (
+	regionName,
+	done) {
+	this.create({
 
-  this.create({
+		regionName
 
-    regionName,
-
-  }, done)
-
+	}, done)
 }
 
-
-
-RegionModel.prototype.setRegionName = function(regionName, done) {
-  this.regionName = regionName
-  this.save((err) => {
-    if (err) return done(err);
-    done(null, this);
-  })
+RegionModel.prototype.setRegionName = function (regionName, done) {
+	this.regionName = regionName
+	this.save((err) => {
+		if (err) return done(err)
+		done(null, this)
+	})
 }
-
-
-
-
 
 module.exports = RegionModel

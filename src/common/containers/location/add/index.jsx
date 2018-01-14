@@ -16,38 +16,38 @@ type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Street Address',
-	name: 'streetAddress',
-	label: 'Street Address',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Postal Code',
-	name: 'postalCode',
-	label: 'Postal Code',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'City',
-	name: 'city',
-	label: 'City',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'State Province',
-	name: 'stateProvince',
-	label: 'State Province',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Street Address',
+		name: 'streetAddress',
+		label: 'Street Address',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Postal Code',
+		name: 'postalCode',
+		label: 'Postal Code',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'City',
+		name: 'city',
+		label: 'City',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'State Province',
+		name: 'stateProvince',
+		label: 'State Province',
+
+		component: InputField
+	}
+
 ]
 class LocationAdd extends Component<Props, State> {
 	render () {
@@ -60,12 +60,12 @@ class LocationAdd extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/location`,
-                                                  state: {}
-                                                  }}>Search Location</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/location`,
+								state: {}
+							}}>Search Location</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -99,4 +99,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'LOCATION_ADD_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(LocationAdd)
 )
-

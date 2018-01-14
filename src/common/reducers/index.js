@@ -1,74 +1,70 @@
 // @flow
 import {
-  combineReducers
+	combineReducers
 } from 'redux'
 import {
-  routerReducer
+	routerReducer
 } from 'react-router-redux'
 import {
-  reducer as reduxFormReducer
+	reducer as reduxFormReducer
 } from 'redux-form'
 
 import type {
-  State as AuthState
+	State as AuthState
 } from 'reducers/auth'
 import type {
-  State as LayoutState
+	State as LayoutState
 } from 'reducers/layout'
 import type {
-  State as EntitiesLinksState
+	State as EntitiesLinksState
 } from 'reducers/links'
 
 import {
-  layout
+	layout
 } from './layout'
 import {
-  links
+	links
 } from './links'
 import {
-  auth
+	auth
 } from './auth'
 import {
-  region
+	region
 } from './region'
 import {
-  country
+	country
 } from './country'
 import {
-  location
+	location
 } from './location'
 import {
-  department
+	department
 } from './department'
 import {
-  task
+	task
 } from './task'
 import {
-  employee
+	employee
 } from './employee'
 import {
-  job
+	job
 } from './job'
-import {
-  jobHistory
-} from './jobhistory'
 // Root reducer
 export default combineReducers({
-  layout,
-  auth,
-  region,
-  country,
-  location,
-  department,
-  task,
-  employee,
-  job,
-  jobHistory,
-  entities: combineReducers({
-    links
-  }),
-  routing: routerReducer,
-  form: reduxFormReducer
+	layout,
+	auth,
+	region,
+	country,
+	location,
+	department,
+	task,
+	employee,
+	job,
+	entities: combineReducers({
+		links
+	}),
+	routing: routerReducer,
+	form: reduxFormReducer
 })
 
 export type GlobalState = {

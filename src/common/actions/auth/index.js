@@ -1,16 +1,16 @@
 // @flow
 import {
-  awral
+	awral
 } from 'actions/utils'
 import {
-  loginAPI
+	loginAPI
 } from 'api/AuthSvc'
 import {
-  setLocalToken,
-  resetLocalToken
+	setLocalToken,
+	resetLocalToken
 } from 'api/LocalStorageCookiesSvc'
 import {
-  SubmissionError
+	SubmissionError
 } from 'redux-form'
 
 export const LOGIN_AUTH_SUCCESS = 'LOGIN_AUTH_SUCCESS'
@@ -42,47 +42,47 @@ export type LOGOUT_AUTH_SUCCESS_TYPE = {
   {@link https://github.com/Metnew/awral}
 */
 const awralLogin = awral.of({
-  pending: null,
-  success({
-    payload,
-    dispatch
-  }) {
-    if (payload.status === 'failure') {
-      resetLocalToken()
-      dispatch({
-        type: LOGIN_AUTH_FAIL,
-        errors: payload.message
-      })
-      throw new SubmissionError({
-        _error: payload.message
-      })
-    } else {
-      setLocalToken(payload.token)
-      dispatch({
-        type: LOGIN_AUTH_SUCCESS,
-        payload
-      })
-    }
-  },
-  fail({
-    payload,
-    dispatch
-  }) {
-    dispatch({
-      type: LOGIN_AUTH_FAIL,
-      errors: (payload && payload.message) || "Server Error"
-    })
-    throw new SubmissionError({
-      _error: (payload && payload.message) || "Server Error"
-    })
-  }
+	pending: null,
+	success ({
+		payload,
+		dispatch
+	}) {
+		if (payload.status === 'failure') {
+			resetLocalToken()
+			dispatch({
+				type: LOGIN_AUTH_FAIL,
+				errors: payload.message
+			})
+			throw new SubmissionError({
+				_error: payload.message
+			})
+		} else {
+			setLocalToken(payload.token)
+			dispatch({
+				type: LOGIN_AUTH_SUCCESS,
+				payload
+			})
+		}
+	},
+	fail ({
+		payload,
+		dispatch
+	}) {
+		dispatch({
+			type: LOGIN_AUTH_FAIL,
+			errors: (payload && payload.message) || 'Server Error'
+		})
+		throw new SubmissionError({
+			_error: (payload && payload.message) || 'Server Error'
+		})
+	}
 })
 
 export const LOGIN_AUTH = awralLogin(loginAPI)('LOGIN_AUTH')
 
 export const LOGOUT_AUTH = () => dispatch => {
-  resetLocalToken()
-  dispatch({
-    type: LOGOUT_AUTH_SUCCESS
-  })
+	resetLocalToken()
+	dispatch({
+		type: LOGOUT_AUTH_SUCCESS
+	})
 }

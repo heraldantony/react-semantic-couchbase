@@ -16,14 +16,14 @@ type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Department Name',
-	name: 'departmentName',
-	label: 'Department Name',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Department Name',
+		name: 'departmentName',
+		label: 'Department Name',
+
+		component: InputField
+	}
+
 ]
 class DepartmentAdd extends Component<Props, State> {
 	render () {
@@ -36,12 +36,12 @@ class DepartmentAdd extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/department`,
-                                                  state: {}
-                                                  }}>Search Department</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/department`,
+								state: {}
+							}}>Search Department</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -75,4 +75,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'DEPARTMENT_ADD_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(DepartmentAdd)
 )
-

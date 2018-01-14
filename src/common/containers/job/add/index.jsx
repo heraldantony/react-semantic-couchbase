@@ -16,30 +16,30 @@ type Props = FormProps
 
 const fields = [
 
-        {
-	placeholder: 'Job Title',
-	name: 'jobTitle',
-	label: 'Job Title',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Min Salary',
-	name: 'minSalary',
-	label: 'Min Salary',
-        
-	component: InputField
-       } , 
-  
-        {
-	placeholder: 'Max Salary',
-	name: 'maxSalary',
-	label: 'Max Salary',
-        
-	component: InputField
-       } 
-  
+	{
+		placeholder: 'Job Title',
+		name: 'jobTitle',
+		label: 'Job Title',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Min Salary',
+		name: 'minSalary',
+		label: 'Min Salary',
+
+		component: InputField
+	},
+
+	{
+		placeholder: 'Max Salary',
+		name: 'maxSalary',
+		label: 'Max Salary',
+
+		component: InputField
+	}
+
 ]
 class JobAdd extends Component<Props, State> {
 	render () {
@@ -52,12 +52,12 @@ class JobAdd extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/job`,
-                                                  state: {}
-                                                  }}>Search Job</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/job`,
+								state: {}
+							}}>Search Job</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -91,4 +91,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'JOB_ADD_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(JobAdd)
 )
-

@@ -1,6 +1,6 @@
 // @flow
 import {
-  post
+	post
 } from 'api/utils'
 
 export type SignupDataType = {
@@ -8,6 +8,6 @@ export type SignupDataType = {
   password: string
 }
 
-export async function signupAPI(data: SignupDataType) {
-  return post('/signup', data)
+export async function signupAPI (data: SignupDataType) {
+	return post('/signup', data)
 }

@@ -9,17 +9,17 @@ import {FormattedMessage} from 'react-intl'
 import { connect } from 'react-redux'
 import InputField from 'components/elements/InputField'
 import { TASK_SEARCH } from 'actions/task'
-import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect'
 import {makeSelectSearchTask} from 'selectors/task'
 
 type Props = FormProps
 
 const headerNames = [
 
-	"Title", 
+	'Title',
 
-	"Description"
- ]
+	'Description'
+]
 const searchFields = [{
 	placeholder: 'Search',
 	name: 'search',
@@ -37,12 +37,12 @@ class TaskSearch extends Component<Props, State> {
 				<Grid columns={1}>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
-                                                <Button><Link to={{
-                                                  pathname: `/addTask`,
-                                                  state: {}
-                                                  }}>Add Task</Link></Button>  
-                                                </Grid.Column>
-                                        </Grid.Row>
+							<Button><Link to={{
+								pathname: `/addTask`,
+								state: {}
+							}}>Add Task</Link></Button>
+						</Grid.Column>
+					</Grid.Row>
 					<Grid.Row centered>
 						<Grid.Column width={16}>
 							<Form>
@@ -60,64 +60,64 @@ class TaskSearch extends Component<Props, State> {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-                     { (searchProps && searchProps.tasks.length) ?  (
-<Table celled>
-    <Table.Header>
-      <Table.Row>
+				{ (searchProps && searchProps.tasks.length) ? (
+					<Table celled>
+						<Table.Header>
+							<Table.Row>
 
-	<Table.HeaderCell>Title</Table.HeaderCell>
+								<Table.HeaderCell>Title</Table.HeaderCell>
 
-	<Table.HeaderCell>Description</Table.HeaderCell>
- 
-	<Table.HeaderCell>&nbsp;</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
+								<Table.HeaderCell>Description</Table.HeaderCell>
 
-    <Table.Body>
-     { searchProps.tasks.map((task, idx) => {
-      return ( <Table.Row key={"task_"+idx}>
+								<Table.HeaderCell>&nbsp;</Table.HeaderCell>
+							</Table.Row>
+						</Table.Header>
 
-	<Table.Cell>{task["title"]}</Table.Cell>
+						<Table.Body>
+							{ searchProps.tasks.map((task, idx) => {
+								return (<Table.Row key={'task_' + idx}>
 
-	<Table.Cell>{task["description"]}</Table.Cell>
- 
-	<Table.Cell><Link to={"/editTask/"+task["_id"]}><Button icon><Icon name="edit"/></Button></Link>
-  <Link to={"/viewTask/"+task["_id"]}><Button icon><Icon name="unhide"/></Button></Link></Table.Cell>
-      </Table.Row> )
-      })
-    }
-    </Table.Body>
+									<Table.Cell>{task['title']}</Table.Cell>
 
-    <Table.Footer>
-      <Table.Row>
-        <Table.HeaderCell colSpan='3'>
-          <Menu floated='right' pagination>
-            <Menu.Item as='a' icon>
-              <Icon name='left chevron' />
-            </Menu.Item>
-            <Menu.Item as='a'>1</Menu.Item>
-            <Menu.Item as='a'>2</Menu.Item>
-            <Menu.Item as='a'>3</Menu.Item>
-            <Menu.Item as='a'>4</Menu.Item>
-            <Menu.Item as='a' icon>
-              <Icon name='right chevron' />
-            </Menu.Item>
-          </Menu>
-        </Table.HeaderCell>
-      </Table.Row>
-    </Table.Footer>
-  </Table>
- ) : ""
-}
-                         
+									<Table.Cell>{task['description']}</Table.Cell>
+
+									<Table.Cell><Link to={'/editTask/' + task['_id']}><Button icon><Icon name="edit"/></Button></Link>
+										<Link to={'/viewTask/' + task['_id']}><Button icon><Icon name="unhide"/></Button></Link></Table.Cell>
+								</Table.Row>)
+							})
+							}
+						</Table.Body>
+
+						<Table.Footer>
+							<Table.Row>
+								<Table.HeaderCell colSpan='3'>
+									<Menu floated='right' pagination>
+										<Menu.Item as='a' icon>
+											<Icon name='left chevron' />
+										</Menu.Item>
+										<Menu.Item as='a'>1</Menu.Item>
+										<Menu.Item as='a'>2</Menu.Item>
+										<Menu.Item as='a'>3</Menu.Item>
+										<Menu.Item as='a'>4</Menu.Item>
+										<Menu.Item as='a' icon>
+											<Icon name='right chevron' />
+										</Menu.Item>
+									</Menu>
+								</Table.HeaderCell>
+							</Table.Row>
+						</Table.Footer>
+					</Table>
+				) : ''
+				}
+
 			</div>
 		)
 	}
 }
 const mapStateToProps = state => createStructuredSelector({
-        searchProps: makeSelectSearchTask()
-      }
-    )
+	searchProps: makeSelectSearchTask()
+}
+)
 
 const mapDispatchToProps = dispatch => ({
 	async search (data) {
@@ -130,4 +130,3 @@ const mapDispatchToProps = dispatch => ({
 export default reduxForm({ form: 'TASK_SEARCH_FORM' })(
 	connect(mapStateToProps, mapDispatchToProps)(TaskSearch)
 )
-
